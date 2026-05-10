@@ -56,7 +56,7 @@ const FlashMessage = ({ message, type = 'info', onClose, duration = 5000 }) => {
           initial={{ opacity: 0, y: -50, scale: 0.3 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.2 } }}
-          className={`fixed top-4 right-4 z-50 max-w-sm w-full p-4 rounded-lg border ${getBgColor()} ${getTextColor()} shadow-lg`}
+          className={`fixed top-20 right-4 z-[10050] max-w-sm w-full p-4 rounded-lg border ${getBgColor()} ${getTextColor()} shadow-lg`}
         >
           <div className="flex items-start gap-3">
             <div className="flex-shrink-0 mt-0.5">

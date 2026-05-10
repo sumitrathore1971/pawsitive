@@ -13,21 +13,74 @@ function signToken(user) {
   return jwt.sign(payload, secret, { expiresIn: '1h' });
 }
 
+function normalizeRoleInput(role) {
+  const raw = String(role || '').trim();
+  const compact = raw.replace(/\s+/g, '').toLowerCase();
+
+  if (compact === 'petowner') return 'PetOwner';
+  if (compact === 'caregiver') return 'Caregiver';
+  if (compact === 'admin') return 'Admin';
+  return raw;
+}
+
+function normalizeEmailInput(email) {
+  return String(email || '').trim().toLowerCase();
+}
+
 router.post('/signup', async (req, res) => {
   try {
     
     
-    const { name, email, password, role } = req.body;
-    if (!name || !email || !password || !role) return res.status(400).json({ message: 'Missing fields' });
-    if (!['Citizen', 'Enforcement', 'Admin', 'UrbanDevelopment', 'Revenue'].includes(role)) return res.status(400).json({ message: 'Invalid role' });
+    const { name, email, password, role, phone, address, experience, idProof } = req.body;
+    const normalizedEmail = normalizeEmailInput(email);
+    const normalizedRole = normalizeRoleInput(role);
 
-    const existing = await User.findOne({ email });
+    if (!name || !normalizedEmail || !password || !normalizedRole) {
+      return res.status(400).json({ message: 'Missing fields' });
+    }
+
+    const validRoles = ['PetOwner', 'Caregiver', 'Admin'];
+
+    if (!validRoles.includes(normalizedRole)) {
+      return res.status(400).json({
+        message: 'Invalid role. Allowed: PetOwner, Caregiver, Admin',
+      });
+    }
+
+    // Role-specific required fields for caregivers.
+    if (normalizedRole === 'Caregiver') {
+      if (!phone || !address || !experience || !idProof) {
+        return res.status(400).json({ message: 'Missing caregiver fields' });
+      }
+    }
+
+    const existing = await User.findOne({ email: normalizedEmail });
     if (existing) return res.status(409).json({ message: 'Email already registered' });
 
     const hash = await bcrypt.hash(password, 10);
-    const user = await User.create({ name, email, password: hash, role });
+    const user = await User.create({
+      name,
+      email: normalizedEmail,
+      password: hash,
+      role: normalizedRole,
+      phone: normalizedRole === 'Caregiver' ? phone : undefined,
+      address: normalizedRole === 'Caregiver' ? address : undefined,
+      experience: normalizedRole === 'Caregiver' ? experience : undefined,
+      idProof: normalizedRole === 'Caregiver' ? idProof : undefined,
+      // Caregivers start unverified; admins can approve later.
+      isVerified: normalizedRole === 'Caregiver' ? false : true,
+    });
     const token = signToken(user);
-    return res.status(201).json({ token, user: { id: user._id, name: user.name, email: user.email, role: user.role } });
+    return res.status(201).json({
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        isVerified: user.isVerified,
+      },
+    });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: 'Server error' });
@@ -37,16 +90,33 @@ router.post('/signup', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
-    if (!email || !password) return res.status(400).json({ message: 'Missing credentials' });
+    const normalizedEmail = normalizeEmailInput(email);
+    if (!normalizedEmail || !password) return res.status(400).json({ message: 'Missing credentials' });
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: normalizedEmail });
     if (!user) return res.status(401).json({ message: 'Invalid email or password' });
+
+    const allowedRoles = ['PetOwner', 'Caregiver', 'Admin'];
+    if (!allowedRoles.includes(user.role)) {
+      return res.status(403).json({
+        message: 'This account role is no longer supported. Please contact admin.',
+      });
+    }
 
     const ok = await bcrypt.compare(password, user.password);
     if (!ok) return res.status(401).json({ message: 'Invalid email or password' });
 
     const token = signToken(user);
-    return res.json({ token, user: { id: user._id, name: user.name, email: user.email, role: user.role } });
+    return res.json({
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        isVerified: user.isVerified,
+      },
+    });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: 'Server error' });
@@ -126,7 +196,9 @@ router.put('/profile', authMiddleware, async (req, res) => {
 
 router.get('/me', authMiddleware, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select('_id name email role createdAt phone address');
+    const user = await User.findById(req.user.id).select(
+      '_id name email role createdAt phone address experience idProof isVerified'
+    );
     if (!user) return res.status(404).json({ message: 'User not found' });
     return res.json({ user });
   } catch (err) {
