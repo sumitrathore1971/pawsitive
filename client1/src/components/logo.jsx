@@ -10,7 +10,7 @@ export function Logo() {
         loading="eager"
         decoding="sync"
       />
-      <span className="font-semibold text-xl md:text-2xl">Bhu Nirakshak</span>
+      <span className="font-semibold text-xl md:text-2xl">Pawsitive</span>
     </div>
   );
 }

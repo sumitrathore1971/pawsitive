@@ -97,8 +97,8 @@ function MobileNav({ navItems, visible }) {
 
               <div className="flex flex-col gap-2 w-full">
                 <Button className="block md:hidden w-full cursor-pointer" variant="destructive">
-                  <Link to="/citizen" onClick={() => setOpen(false)} className="cursor-pointer">
-                    Report Issue
+                  <Link to="/signup" onClick={() => setOpen(false)} className="cursor-pointer">
+                    Become sitter
                   </Link>
                 </Button>
                 <Button className="block md:hidden w-full cursor-pointer">
@@ -148,7 +148,7 @@ function DesktopNavInner({ navItems, visible, hovered, setHovered }) {
       <div className="flex items-center gap-4">
         <a href="/signup" style={{zIndex : "100"}}>
         <Button className="hidden md:block cursor-pointer" variant="destructive">
-          <Link to="/signup" className="cursor-pointer">Report Issue</Link>
+          <Link to="/signup" className="cursor-pointer">Become Caregiver</Link>
         </Button>
         </a>
         <a href="/login" style={{zIndex : "100"}}>

@@ -10,7 +10,7 @@
       <section id="home"
         className="relative flex flex-col items-center justify-center h-[100dvh] w-full overflow-hidden"
         style={{
-          backgroundImage: "url('/assets/rajnagar.jpg')",
+          backgroundImage: "url('/assets/hero1.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -21,18 +21,18 @@
           <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
             <img src="/assets/logo.png" alt="Bhu Nirakshak" className="h-45 w-auto mx-auto" />
             <h1 className="mt-6 text-5xl md:text-6xl lg:text-7xl font-heading font-bold tracking-tight leading-tight text-gray-900 dark:text-white drop-shadow-lg">
-              Detect & Prevent Illegal Construction — in Real Time
+              Love, Care, and Comfort - On Demand
             </h1>
             <p className="mt-5 text-xl md:text-2xl text-gray-700 dark:text-gray-200 max-w-3xl mx-auto">
-              AI, GIS Maps, and Citizen Engagement for Smarter Cities
+              Trusted Sitters, Smart Booking, and Stress-Free Pet Care
             </p>
           </motion.div>
           <motion.div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.7 }}>
             <Button size="lg" className="px-8 py-3 text-lg shadow-md" variant="default">
-            <a href="/signup">Report a Case</a>
+            <a href="/signup">Become Sitter</a>
             </Button>
             <Button size="lg" className="px-8 py-3 text-lg shadow-md" variant="secondary">
-             <a href="/login">View Dashboard</a>
+             <a href="/login">Book Service Now</a>
             </Button>
           </motion.div>
         </div>
