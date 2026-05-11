@@ -6,7 +6,8 @@ export default function Sidebar({ items = [], onNavigate }) {
   return (
     <aside className="w-72 border-r border-white/30 bg-white/50 p-4 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/60">
       <div className="mb-6 flex items-center gap-2 rounded-2xl bg-white/70 p-3 shadow-sm dark:bg-slate-900/70">
-        <PawPrint className="text-orange-500" size={20} />
+        {/* <PawPrint className="text-orange-500" size={20} /> */}
+        <img src="/assets/logo.png" alt="Bhu Nirakshak Logo" className="h-8 w-auto rounded-sm" />
         <span className="font-semibold text-slate-900 dark:text-white">{APP_NAME}</span>
       </div>
       <nav className="space-y-2.5">

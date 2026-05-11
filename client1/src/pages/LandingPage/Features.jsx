@@ -1,22 +1,32 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { IconMap, IconUserPlus, IconCamera, IconDrone, IconLayoutDashboard } from "@tabler/icons-react";
+import { IconPaw, IconHeartHandshake, IconClock, IconShieldCheck, IconMapPin } from "@tabler/icons-react";
 
 const features = [
   {
-    icon: <IconMap size={32} className="text-primary" />, title: "Real-Time Hotspot Map", desc: "Visualize illegal construction hotspots instantly on a live GIS map."
+    icon: <IconPaw size={32} className="text-primary" />,
+    title: "On-Demand Pet Services",
+    desc: "Book pet sitting, walking, grooming etc. services instantly—anytime, anywhere."
   },
   {
-    icon: <IconUserPlus size={32} className="text-primary" />, title: "Citizen Reporting", desc: "Empower citizens to report suspicious activities with ease."
+    icon: <IconHeartHandshake size={32} className="text-primary" />,
+    title: "Smart Caregiver Matching",
+    desc: "Easily find trusted caregivers based on your pet’s needs."
   },
   {
-    icon: <IconCamera size={32} className="text-primary" />, title: "PhotoDCR Validation", desc: "Automated document and photo validation for faster case review."
+    icon: <IconClock size={32} className="text-primary" />,
+    title: "Real-Time Service Updates",
+    desc: "Stay connected with live updates, and notifications during every session."
   },
   {
-    icon: <IconDrone size={32} className="text-primary" />, title: "Drone Surveillance", desc: "Integrate aerial data for comprehensive monitoring."
+    icon: <IconShieldCheck size={32} className="text-primary" />,
+    title: "Verified Caregivers",
+    desc: "All caregivers are background-checked, and rated to ensure safety and trust."
   },
   {
-    icon: <IconLayoutDashboard size={32} className="text-primary" />, title: "Role-Based Dashboard", desc: "Custom dashboards for citizens, inspectors, and admins."
+    icon: <IconMapPin size={32} className="text-primary" />,
+    title: "Pet Care Tracking",
+    desc: "Monitor your pet’s activities,  and service history in one place."
   },
 ];
 
@@ -35,7 +45,7 @@ export default function Features() {
               className="flex flex-col items-center bg-gray-50 dark:bg-neutral-900 rounded-xl p-6 shadow-md transition-all cursor-pointer hover:bg-primary/10"
             >
               <div className="mb-4">{f.icon}</div>
-              <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-white">{f.title}</h3>
+              <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-white text-center">{f.title}</h3>
               <p className="text-gray-600 dark:text-gray-300 text-center text-sm">{f.desc}</p>
             </motion.div>
           ))}

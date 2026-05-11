@@ -1,13 +1,33 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { IconBrain, IconUserCheck, IconCamera, IconGavel, IconActivity } from "@tabler/icons-react";
+import { IconSearch, IconCalendar, IconShieldCheck, IconHeart, IconActivity  } from "@tabler/icons-react";
 
 const steps = [
-  { icon: <IconBrain size={28} className="text-primary" />, title: "Detect", desc: "AI + Satellite/Drone Data" },
-  { icon: <IconUserCheck size={28} className="text-primary" />, title: "Report", desc: "Citizen/Inspector" },
-  { icon: <IconCamera size={28} className="text-primary" />, title: "Verify", desc: "PhotoDCR + BhuNaksha" },
-  { icon: <IconGavel size={28} className="text-primary" />, title: "Act", desc: "Enforcement" },
-  { icon: <IconActivity size={28} className="text-primary" />, title: "Track", desc: "Live Case Status" },
+  {
+    icon: <IconSearch size={28} className="text-primary" />,
+    title: "Discover",
+    desc: "Find trusted pet services near you",
+  },
+  {
+    icon: <IconCalendar size={28} className="text-primary" />,
+    title: "Book",
+    desc: "Schedule grooming, walking or vet care",
+  },
+  {
+    icon: <IconShieldCheck size={28} className="text-primary" />,
+    title: "Confirm",
+    desc: "Verified providers with quick confirmation",
+  },
+  {
+    icon: <IconHeart size={28} className="text-primary" />,
+    title: "Care",
+    desc: "Safe and loving service for your pet",
+  },
+  {
+    icon: <IconActivity size={28} className="text-primary" />,
+    title: "Track",
+    desc: "Get live updates and service status",
+  },
 ];
 
 export default function HowItWorks() {

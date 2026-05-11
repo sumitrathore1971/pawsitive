@@ -48,7 +48,7 @@ export default function AddPet() {
     <OwnerLayout>
       <div className="mx-auto grid max-w-4xl gap-5 lg:grid-cols-[1fr_320px]">
         <form onSubmit={handleSubmit} className="rounded-3xl border border-white/60 bg-white/75 p-6 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-900/75">
-          <p className="text-sm font-medium text-orange-500">Step 1 of 1 - Pet Onboarding</p>
+          <p className="text-sm font-medium text-black-500">Step 1 of 1 - Pet Onboarding</p>
           <h2 className="mt-1 text-2xl font-bold text-slate-900 dark:text-white">Create your pet profile</h2>
           <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">Add pet details before accessing your dashboard.</p>
 
@@ -71,8 +71,9 @@ export default function AddPet() {
         </form>
 
         <div className="rounded-3xl border border-white/60 bg-white/75 p-6 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-900/75">
-          <div className="grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-orange-500 to-amber-400 text-white">
-            <PawPrint />
+          <div className="grid h-16 w-16 place-items-center  text-white">
+            {/* <PawPrint /> */}
+            <img src="/assets/logo.png" alt="Bhu Nirakshak" className="h-10 w-auto mx-auto" />
           </div>
           <h3 className="mt-3 text-lg font-semibold">Preview Card</h3>
           <div className="mt-3 rounded-2xl bg-slate-50 p-4 dark:bg-slate-800">
